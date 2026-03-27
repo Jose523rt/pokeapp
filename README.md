@@ -18,7 +18,7 @@ Aplicación de Pokémon desarrollada con React Native
 4. Usa el comando `git push origin main` para subir los cambios al repositorio.
 ### NOTA
 La primera vez que se quiera subir un cambio al repositorio debe usarse el comando
-git push -u origin main
+`git push -u origin main`
 
 
 ## Reportes de Commits
