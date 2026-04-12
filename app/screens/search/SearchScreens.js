@@ -1,98 +1,79 @@
-import { ScrollView, StyleSheet, View, Image } from 'react-native'
-import React, { useState } from 'react'
+import { ScrollView, StyleSheet, View, Image, Text } from "react-native";
+import React, { useState, useEffect } from "react";
 import BuscadorPoke from "../../components/buscador/BuscadorPoke";
-import { Card, Text } from 'react-native-paper';
+import { Card } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 export default function SearchScreens() {
-  const ImgPlaceholder = require("../../assets/ditto.png");
   const [search, setSearch] = useState("");
+  const [pokemon, setPokemon] = useState([]);
+  const [error, setError] = useState(false)
+
+
+  const nav = useNavigation();
+
+  const getPokemon = () => {
+    const requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    
+    if (search === "") {
+      fetch(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=20`, requestOptions)
+       .then((res) => res.json())
+       .then((data) =>
+       Promise.all(
+          data.results.map((p) => fetch(p.url).then((r) => r.json()))
+        ))
+        .then((allPokemon) => setPokemon(allPokemon))
+  .catch((error) => console.error(error));
+    }
+    else {
+      fetch(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => setPokemon([result]))
+      .catch((error) => setError(true));
+      }
+  };
+
+  useEffect(() => {
+    getPokemon();
+  }, [search]);
 
   return (
-    <View style={{padding:15}}><BuscadorPoke search={search} setSearch={setSearch}/>
+    <View style={styles.view}>
+      <BuscadorPoke style={{ paddingBottom: 15 }} search={search} setSearch={setSearch} />
+
       <ScrollView>
-        <View style={styles.main}>
-          <View style={styles.grid}>
-
-            <Card style={styles.card}>
-              <View>
-                <Card.Title title="Ditto" style={[{left:37, position:"absolute" }, styles.text]}/>
-                <Image
-                  source={ImgPlaceholder}
-                  style={styles.image}
-                />
-              </View>
-            </Card>
-
-            <Card style={styles.card}>
-              <View>
-                <Card.Title title="Ditto" style={[{left:37, position:"absolute" }, styles.text]}/>
-                <Image
-                  source={ImgPlaceholder}
-                  style={styles.image}
-                />
-              </View>
-            </Card>
-
-            <Card style={styles.card}>
-              <View>
-                <Card.Title title="Ditto" style={[{left:37, position:"absolute" }, styles.text]}/>
-                <Image
-                  source={ImgPlaceholder}
-                  style={styles.image}
-                />
-              </View>
-            </Card>
-
-            <Card style={styles.card}>
-              <View>
-                <Card.Title title="Ditto" style={[{left:37, position:"absolute" }, styles.text]}/>
-                <Image
-                  source={ImgPlaceholder}
-                  style={styles.image}
-                />
-              </View>
-            </Card>
-
-          </View>
-        </View>
+        {pokemon.map((pkmn, index) => (
+          <Card key={index} style={styles.card} onPress={() => nav.push('info', { id: pkmn.id })}>
+            <Image source={{ uri: pkmn.sprites.front_default }} style={styles.image} resizeMode="cover" />
+            <Text style={styles.name}>{pkmn.name}</Text>
+          </Card>
+        ))}
       </ScrollView>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-  main:{
-    justifyContent:"center",
-    fontFamily: "Arial",
-    padding:20,
-    flex:1,
+  view: {
+    flex: 1,
+    padding: 10,
   },
-  title: {
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  card:{
-    margin: 10,
-    width: 150,
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#d9d9d9',
-    elevation: 0,
-    shadowColor: 'transparent',
-  },
-  text: {
-    justifyContent:"center",
-    textAlign:"center",
-  },
-  grid: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
+  card: {
+    marginVertical: 10,
+    padding: 10,
   },
   image: {
-    width: 150,
-    height: 150,
-    resizeMode: 'cover',
-    marginTop: 0
+    width: 100,
+    height: 100,
+    alignSelf: 'center',
   },
-})
+  name: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textTransform: 'capitalize'
+  },
+});
