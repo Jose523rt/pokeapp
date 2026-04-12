@@ -55,6 +55,22 @@ export function MyNavigations() {
             tabBarIcon:({color, size})=>
               <MaterialCommunityIcons name="information-outline" size={size} color={color}/>}}
           />
+      <Tab.Screen
+        name="Tipos"
+        component={TypeTable}
+        options={{
+          headerTitleAlign: "center",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="table"
+              size={size}
+              color={color} 
+                         />
+          ),
+        }}
+      />
     </Tab.Navigator>
   )
 }
+
+//no nada
