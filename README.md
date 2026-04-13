@@ -32,3 +32,7 @@ Se creó PokeInfo.js y se stackeó con SearchScreen.js, así al clickear el poke
 Pendientes - Mostrar tipos de Pokemon en ambas pantallas (complicado), incluir botón de "Agregar al equipo" en PokeInfo, hacer el context para los integrantes del equipo, expandir los styesheets
 
 - Se implementó la petición a la API en la pantalla BattlerScreen
+Pendientes - Mostrar tipos de Pokemon en ambas pantallas (complicado), incluir botón de "Agregar al equipo" en PokeInfo, hacer el context para los integrantes del equipo, .expandir los styesheets.
+
+### 12 de Abril 6:52
+Se agregó el context file Team.
