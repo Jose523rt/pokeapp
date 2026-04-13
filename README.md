@@ -30,3 +30,5 @@ Se creo el proyecto y se agregó a GitHub
 Se empezó SearchScreens.js, que permite al usuario buscar el pokemon que quiera.
 Se creó PokeInfo.js y se stackeó con SearchScreen.js, así al clickear el pokemon se irá directamente a la pantalla de información de este.
 Pendientes - Mostrar tipos de Pokemon en ambas pantallas (complicado), incluir botón de "Agregar al equipo" en PokeInfo, hacer el context para los integrantes del equipo, expandir los styesheets
+
+- Se implementó la petición a la API en la pantalla BattlerScreen
