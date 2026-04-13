@@ -17,7 +17,7 @@ export default function PokeInfo({ route }) {
     fetch(`https://pokeapi.co/api/v2/type/${a}/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-    console.log(JSON.stringify(result.sprites));  
+    //console.log(JSON.stringify(result.sprites));  
     setType1([result]);
   })
       .catch((error) => console.error(error));
