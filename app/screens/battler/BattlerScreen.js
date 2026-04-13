@@ -1,28 +1,46 @@
 import { StyleSheet, View, Image } from 'react-native'
 import { Button, Card, Surface, Text, Portal, Modal } from "react-native-paper"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import{ TeamContext } from "../../context/Team";
 
 export default function BattlerScreen() {
-  const ImgPlaceholder = require("../../assets/lucario.png");
+
+  const { slot1, slot2, slot3, slot4, slot5, slot6 } = useContext(TeamContext);
+  const team = [slot1, slot2, slot3, slot4, slot5, slot6];
+  const [hasTeam, setHasTeam] = useState(false);
+  const [key, setKey] = useState(1);
+  const [ activePoke, setActivePoke ] = useState();
+  const [activePokeFoe, setActivePokeFoe] = useState([])
+  
 
   const [pokemonFoe, setPokemonFoe] = useState([]);
   const [pokemonMate, setPokemonMate] = useState([]);
-  const [search, setSearch] = useState(4);
+  const [randomPoke, setRandomPoke] = useState();
   const random = Math.floor(Math.random() * (151 - 1 + 1) + 1);
 
-  function hasWon(){
-    if (Pokemon.types.type.name ){
-
-    }
+  function battle() {
+      if (activePoke.stats[0].base_stat > activePokeFoe.stats[0].base_stat) {
+        showWin()
+        console.log(`La vida de tu pokemon es de: ${activePoke.stats[0].base_stat}`)
+        console.log(`La vida de tu enemigo es de: ${activePokeFoe.stats[0].base_stat}`)
+      } else{
+        showLoose()
+        console.log(`La vida de tu pokemon es de: ${activePoke.stats[0].base_stat}`)
+        console.log(`La vida de tu enemigo es de: ${activePokeFoe.stats[0].base_stat}`)
+      }
+    
   }
 
-  const [visible, setVisible] = React.useState(false);
-  const [visible1, setVisible1] = React.useState(false);
+  const [winVisible, setWin] = useState(false);
+  const [looseVisible, setLoose] = useState(false);
+  const [teamVisible, setTeamVisible] = useState(false);
 
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-  const showModal1 = () => setVisible1(true);
-  const hideModal1 = () => setVisible1(false);
+  const showWin = () => setWin(true);
+  const hideWin = () => setWin(false);
+  const showLoose = () => setLoose(true);
+  const hideLoose = () => setLoose(false);
+  const showTeam = () => setTeamVisible(true);
+  const hideTeam = () => setTeamVisible(false);
 
   const getPokemonFoe = (random)=> {
       const requestOptions = {
@@ -36,28 +54,22 @@ export default function BattlerScreen() {
       .catch((error) => console.error(error));
   }
 
-  const getPokemonMate = (search)=> {
-      const requestOptions = {
-          method: "GET",
-          redirect: "follow"
-      }
-
-      fetch(`https://pokeapi.co/api/v2/pokemon/${search}`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => setPokemonMate([result]))
-      .catch((error) => console.error(error));
-  }
+  useEffect(() => {
+    if (pokemonFoe && pokemonFoe.length > 0) {
+      setActivePokeFoe(pokemonFoe[0]); // O el que necesites
+    }
+  }, [pokemonFoe]);
 
   useEffect(() => {
     
     const delayTime = setTimeout(()=>{
       getPokemonFoe(random)
-      getPokemonMate(search)
     }, 500) // Tiempo de delay
     return () => clearTimeout(delayTime)
-  }, [search])
+  }, [randomPoke])
 
   //console.log(search)
+  // {setKey(prevKey => prevKey + 1), setHasTeam(true)}
 
   return (
     <View>
@@ -83,30 +95,55 @@ export default function BattlerScreen() {
       </View>
 
       <View style={{bottom: 130, left:170, margin: 0, padding:0}}><Text variant='displayMedium'>VS</Text></View>
-
-      <View style={[styles.containerI, {bottom:120}]}>
-        {pokemonMate.map((Pokemon,index)=>(
-        <Card style={styles.card} key={index}>
-          <View>
-            <Image source={{uri: Pokemon.sprites.back_default}} style={styles.image}/>
+      <View key={key}>
+        { 
+          hasTeam === false ? 
+          <View style={[styles.containerI, {bottom:120}]}>
+            <Card style={[styles.card, {height:230, width:230}]}>
+              <View>
+                <Button style={{justifyContent:"center", alignItems:"center", alignSelf:"center"}}
+                  onPress={() => showTeam()}>Elije un Pokemon</Button>
+              </View>
+            </Card>
+          </View>:
+          
+          <View style={[styles.containerI, {bottom:120}]}>
+            <Card style={styles.card} onPress={()=> showTeam()}>
+              <View>
+                <Image source={{uri: activePoke.sprites.back_default}} style={styles.image}/>
+              </View>
+            </Card>
           </View>
-        </Card>
-        ))}
+        }
       </View>
 
       <View style={{justifyContent:"center", alignContent:"center", alignItems:"center"}}>
         <Button mode='contained' style={[styles.button, {justifyContent:"center"}]}
-        onPress={showModal}> 
+        onPress={()=> battle()}> 
           Fight!
         </Button>
       </View>
 
       <Portal>
-        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={styles.modal}>
+        <Modal visible={winVisible} onDismiss={hideWin} contentContainerStyle={styles.modal}>
           <Text variant='displayLarge' style={styles.text}>You Won</Text>
         </Modal>
-        <Modal visible={visible1} onDismiss={hideModal1} contentContainerStyle={styles.modal}>
+        <Modal visible={looseVisible} onDismiss={hideLoose} contentContainerStyle={styles.modal}>
           <Text variant='displayLarge' style={styles.text}>You Loose</Text>
+        </Modal>
+        <Modal visible={teamVisible} onDismiss={hideTeam} contentContainerStyle={styles.modal}>
+          <Text variant='displaySmall' style={styles.text}>Selecciona al equipo</Text>
+          <View style={styles.grid}>
+            {team.map((slot, index) => (
+              slot.length !== 0 && (
+                <Card key={index} style={styles.cardGrid} onPress={()=> {setKey(prevKey => prevKey + 1), setHasTeam(true), setActivePoke(slot)}}>
+                  <View>
+                    <Image source={{uri: slot.sprites.front_default}} style={styles.team}/>
+                    <Text style={styles.text}>{slot.name}</Text>
+                  </View>
+                </Card>
+                )))}
+          </View>
         </Modal>
       </Portal>
     </View>
@@ -166,5 +203,18 @@ const styles = StyleSheet.create({
   text: {
     justifyContent:"center",
     textAlign: "center"
+  },
+  grid: {
+    justifyContent: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  cardGrid:{
+    margin: 10,
+    width: 150,
+  },
+  team: {
+    width:80,
+    height:80
   }
 })
