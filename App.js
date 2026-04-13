@@ -4,15 +4,18 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { MyNavigations} from "./app/screens/MyNavigations";
 import { PaperProvider } from 'react-native-paper';
+import { Team } from "../pokeapp/app/context/Team"
 
 export default function App() {
   
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <MyNavigations/>
-      </NavigationContainer>
-    </PaperProvider>
+    <Team>
+      <PaperProvider>
+        <NavigationContainer>
+          <MyNavigations/>
+        </NavigationContainer>
+      </PaperProvider>
+    </Team>
   );
 }
 

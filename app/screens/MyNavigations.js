@@ -31,6 +31,7 @@ export function MyNavigations() {
         <Tab.Screen
           name='Team' component={TeamScreen}
           options={{
+            unmountOnBlur: true,
             headerTitleAlign:"center",
             tabBarIcon:({color, size})=>
               <MaterialCommunityIcons name="pokeball" size={size} color={color}/>}}
@@ -39,6 +40,7 @@ export function MyNavigations() {
           name='Buscador' component={SearchStack}
           options={{
             headerTitleAlign:"center",
+            headerShown:false,
             tabBarIcon:({color, size})=>
               <MaterialCommunityIcons name="magnify" size={size} color={color}/>}}
           />
@@ -77,8 +79,8 @@ export function MyNavigations() {
 export function SearchStack(){
     return(
         <Stack.Navigator>
-           <Stack.Screen name="search" component={SearchScreen} options={{headerTitleAlign:"center"}}/>
-            <Stack.Screen name="info" component={PokeInfo} options={{headerTitleAlign:"center"}}/>
+           <Stack.Screen name="search"  component={SearchScreen} options={{headerTitleAlign:"center", title:"Buscador"}}/>
+            <Stack.Screen name="info" component={PokeInfo} options={{headerTitleAlign:"center", title:"Información"}}/>
         </Stack.Navigator>
     )
 }
