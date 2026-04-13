@@ -17,6 +17,7 @@ import PokeScreen from "./pokemon/PokeScreen";
 
 // Pantalla de Búsqueda
 import SearchScreen from "./search/SearchScreens";
+import PokeInfo from './search/PokeInfo';
 
 // Pantalla Team
 import TeamScreen from "./team/TeamScreen";
@@ -35,7 +36,7 @@ export function MyNavigations() {
               <MaterialCommunityIcons name="pokeball" size={size} color={color}/>}}
           />
         <Tab.Screen
-          name='Buscador' component={SearchScreen}
+          name='Buscador' component={SearchStack}
           options={{
             headerTitleAlign:"center",
             tabBarIcon:({color, size})=>
@@ -73,4 +74,11 @@ export function MyNavigations() {
   )
 }
 
-//no nada
+export function SearchStack(){
+    return(
+        <Stack.Navigator>
+           <Stack.Screen name="search" component={SearchScreen} options={{headerTitleAlign:"center"}}/>
+            <Stack.Screen name="info" component={PokeInfo} options={{headerTitleAlign:"center"}}/>
+        </Stack.Navigator>
+    )
+}
