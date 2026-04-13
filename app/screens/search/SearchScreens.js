@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, View, Image, Text } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import BuscadorPoke from "../../components/buscador/BuscadorPoke";
 import { Card } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
@@ -8,7 +8,6 @@ export default function SearchScreens() {
   const [search, setSearch] = useState("");
   const [pokemon, setPokemon] = useState([]);
   const [error, setError] = useState(false)
-
 
   const nav = useNavigation();
 

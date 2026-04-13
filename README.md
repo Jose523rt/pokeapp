@@ -34,5 +34,6 @@ Pendientes - Mostrar tipos de Pokemon en ambas pantallas (complicado), incluir b
 - Se implementó la petición a la API en la pantalla BattlerScreen
 Pendientes - Mostrar tipos de Pokemon en ambas pantallas (complicado), incluir botón de "Agregar al equipo" en PokeInfo, hacer el context para los integrantes del equipo, .expandir los styesheets.
 
+- Se agregó el botón "Agregar al equipo" y es completamente funcional
 ### 12 de Abril 6:52
 Se agregó el context file Team.

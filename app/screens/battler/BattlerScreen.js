@@ -11,7 +11,9 @@ export default function BattlerScreen() {
   const random = Math.floor(Math.random() * (151 - 1 + 1) + 1);
 
   function hasWon(){
-    
+    if (Pokemon.types.type.name ){
+
+    }
   }
 
   const [visible, setVisible] = React.useState(false);
