@@ -17,11 +17,8 @@ export default function PokeInfo({ route }) {
   const [type1, setType1] = useState([]);
   const [type2, setType2] = useState([]);
   const [isT2, setIsT2] = useState(false);
-  const { AddToTeam } = useContext(TeamContext);
-  const [visible, setVisible] = React.useState(false);
+  const { AddToTeam, visible, setVisible, showModal, hideModal } = useContext(TeamContext);
 
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
 
   function GetTypes(a, b) {
     const requestOptions = {
@@ -96,7 +93,7 @@ export default function PokeInfo({ route }) {
               )}
             </View>
             <TouchableOpacity
-              onPress={() => {AddToTeam(pkmn), showModal()}}
+              onPress={() => {AddToTeam(pkmn)}}
               style={styles.add}
             >
               <Text style={styles.addText}>Agregar al equipo</Text>
