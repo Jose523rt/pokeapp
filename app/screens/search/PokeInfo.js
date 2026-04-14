@@ -109,7 +109,6 @@ export default function PokeInfo({ route }) {
     </ScrollView>
   );
 }
-
 const styles = StyleSheet.create({
   scroll: {
     flex: 1,
@@ -119,40 +118,66 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 20,
+    backgroundColor: "#f5f5f5",
   },
   name: {
     fontSize: 28,
     fontWeight: "bold",
     textTransform: "capitalize",
     marginBottom: 10,
+    color: "#1d2138", // azul oscuro
   },
   image: {
     width: 200,
     height: 200,
+    borderWidth: 3,
+    borderColor: "#CD2B2B", // rojo pokédex
+    borderRadius: 12,
+    backgroundColor: "#fff",
   },
-  types: {
-    flexDirection: "row",
-    gap: 10,
-    marginTop: 10,
-  },
+types: {
+  flexDirection: "row",
+  gap: 20,
+  marginTop: 5,
+  padding: 8,
+  borderRadius: 8,
+  backgroundColor: "#CD2B2B", // rojo pokédex
+  borderWidth: 2,
+  borderColor: "#1d2138",     // azul pokédex
+},
   typeImage: {
     width: 100,
     height: 30,
   },
   add: {
     marginTop: 20,
-    backgroundColor: "#1d2138",
-    padding: 10,
+    backgroundColor: "#CD2B2B", // rojo pokédex
+    paddingVertical: 12,
+    paddingHorizontal: 20,
     borderRadius: 10,
+    shadowColor: "#1d2138", // azul pokédex
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 6,
   },
   addText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
+    letterSpacing: 0.5,
   },
   modal: {
-    backgroundColor: 'white', 
+    backgroundColor: "#1d2138ad", // azul pokédex
     padding: 20,
-    height:600
+    height: 150,
+    borderRadius: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
   },
 });

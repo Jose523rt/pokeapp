@@ -37,7 +37,7 @@ export default function TypeTable({ route }) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Tipo: {typeName}</Text>
+      <Text style={styles.title}>{`Tipo: ${typeName}`}</Text>
 
       <Text style={styles.header}>Ofensiva</Text>
 
@@ -101,46 +101,97 @@ export default function TypeTable({ route }) {
   );
 }
 
+const C = {
+  bg:       '#F5F5F5',
+  red:      '#CD2B2B',
+  dark:     '#1A1A1A',
+  white:    '#FFFFFF',
+  card:     '#1A3A5C',
+  border:   '#2A2A2A',
+  section:  '#2D2D2D',
+  subtext:  '#444444',
+};
+
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    backgroundColor: C.bg,
+    padding: 14,
+    paddingBottom: 30,
   },
+
+  // Título principal "Tipo: fire"
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 26,
+    fontWeight: '900',
+    color: C.dark,
     textTransform: 'capitalize',
+    textAlign: 'center',
     marginBottom: 16,
+    letterSpacing: 0.5,
   },
+
+  // "Ofensiva" / "Defensiva"
   header: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 16,
-    marginBottom: 8,
+    fontSize: 18,
+    fontWeight: '900',
+    color: C.white,
+    backgroundColor: C.red,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    letterSpacing: 0.5,
+    overflow: 'hidden',
   },
+
+  // "Doble daño a:", etc.
   sectionTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#555',
+    fontSize: 13,
+    fontWeight: '800',
+    color: C.subtext,
+    textTransform: 'capitalize',
     marginBottom: 6,
+    marginTop: 4,
+    letterSpacing: 0.3,
   },
+
+  // Fila de badges
   typeList: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
     marginBottom: 12,
   },
+
+  // Badge individual de tipo
   typeBadge: {
-    backgroundColor: '#e0e0e0',
-    borderRadius: 6,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
+    backgroundColor: C.card,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: C.border,
+    paddingHorizontal: 14,
+    paddingVertical: 5,
+    elevation: 2,
+    shadowColor: C.dark,
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 3,
   },
+
   typeText: {
+    color: C.white,
+    fontSize: 13,
+    fontWeight: '800',
     textTransform: 'capitalize',
-    fontWeight: '500',
+    letterSpacing: 0.3,
   },
+
+  // "Ningún tipo"
   none: {
-    color: '#aaa',
+    fontSize: 13,
+    color: '#AAAAAA',
     fontStyle: 'italic',
+    marginBottom: 4,
   },
 });
