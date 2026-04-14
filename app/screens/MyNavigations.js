@@ -10,10 +10,6 @@ import AboutScreen from './about/AboutScreen';
 import BattlerScreen from "./battler/BattlerScreen";
 import TypeSearch from "./battler/TypeSearch";
 import TypeTable from "./battler/TypeTable";
-import WinScreen from "./battler/WinScreen";
-
-// Pantalla Pokemon
-import PokeScreen from "./pokemon/PokeScreen";
 
 // Pantalla de Búsqueda
 import SearchScreen from "./search/SearchScreens";
@@ -45,9 +41,10 @@ export function MyNavigations() {
               <MaterialCommunityIcons name="magnify" size={size} color={color}/>}}
           />
         <Tab.Screen
-          name='Battler' component={BattlerScreen}
+          name='Battler' component={BattleStack}
           options={{
             headerTitleAlign:"center",
+            headerShown: false,
             tabBarIcon:({color, size})=>
               <MaterialCommunityIcons name="boxing-glove" size={size} color={color}/>}}
           />
@@ -57,20 +54,6 @@ export function MyNavigations() {
             headerTitleAlign:"center",
             tabBarIcon:({color, size})=>
               <MaterialCommunityIcons name="information-outline" size={size} color={color}/>}}
-          />
-      <Tab.Screen
-        name="Tipos"
-        component={TypeTable}
-        options={{
-          headerTitleAlign: "center",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="table"
-              size={size}
-              color={color} 
-                         />
-          ),
-        }}
       />
     </Tab.Navigator>
   )
@@ -79,8 +62,18 @@ export function MyNavigations() {
 export function SearchStack(){
     return(
         <Stack.Navigator>
-           <Stack.Screen name="search"  component={SearchScreen} options={{headerTitleAlign:"center", title:"Buscador"}}/>
-            <Stack.Screen name="info" component={PokeInfo} options={{headerTitleAlign:"center", title:"Información"}}/>
+          <Stack.Screen name="search"  component={SearchScreen} options={{headerTitleAlign:"center", title:"Buscador"}}/>
+          <Stack.Screen name="info" component={PokeInfo} options={{headerTitleAlign:"center", title:"Información"}}/>
         </Stack.Navigator>
     )
+}
+
+export function BattleStack() {
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="battle"  component={BattlerScreen} options={{headerTitleAlign:"center", title:"Pelea"}}/>
+      <Stack.Screen name="typesearch" component={TypeSearch} options={{headerTitleAlign:"center", title:"Buscar Tipos"}}/>
+      <Stack.Screen name="typetable" component={TypeTable} options={{headerTitleAlign:"center", title:"Info"}}/>
+    </Stack.Navigator>
+  )
 }

@@ -43,3 +43,5 @@ Se agregó el context file Team.
 - Se agrego la lógica detrás del funcionamiento de la batalla.
 - Se agregaron los modales para las situaciones de victoria y derrota.
 
+Se terminaron TypeSearch y TypeTable, se creo BattleStack para habilitar la navegacion entre los stacks de la Battle Screen.
+El proyecto esta listo para mandar al styler.

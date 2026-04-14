@@ -9,7 +9,6 @@ import {
 import React, { useState, useEffect, useContext } from "react";
 import { Portal, Modal } from "react-native-paper";
 import{ TeamContext } from "../../context/Team";
-//import EstadoGlobalUser, { EstadoGlobalUserContext } from './app/context/EstadoGlobalUser';
 
 
 export default function PokeInfo({ route }) {
@@ -33,7 +32,6 @@ export default function PokeInfo({ route }) {
     fetch(`https://pokeapi.co/api/v2/type/${a}/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        //console.log(JSON.stringify(result.sprites));
         setType1([result]);
       })
       .catch((error) => console.error(error));

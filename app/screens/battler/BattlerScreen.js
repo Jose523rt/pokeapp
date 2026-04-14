@@ -1,7 +1,8 @@
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import { Button, Card, Surface, Text, Portal, Modal } from "react-native-paper"
 import React, { useState, useEffect, useContext } from 'react'
 import{ TeamContext } from "../../context/Team";
+import { useNavigation } from "@react-navigation/native";
 
 export default function BattlerScreen() {
 
@@ -29,7 +30,8 @@ export default function BattlerScreen() {
         console.log(`La vida de tu enemigo es de: ${activePokeFoe.stats[0].base_stat}`)
       }
     
-  }
+  const nav = useNavigation();
+
 
   const [winVisible, setWin] = useState(false);
   const [looseVisible, setLoose] = useState(false);
@@ -73,6 +75,7 @@ export default function BattlerScreen() {
 
   return (
     <View>
+      <TouchableOpacity onPress={() => nav.navigate('typesearch')}>
       <Surface style={styles.surface} mode='flat' elevation={4}>
         <View style={styles.containerS}>
           <View style={styles.typeItem}>
@@ -84,6 +87,7 @@ export default function BattlerScreen() {
           </View>
         </View>
       </Surface>
+      </TouchableOpacity>
       <View style={[styles.containerD, {bottom:140}]}>
         {pokemonFoe.map((Pokemon, index)=>(
         <Card style={styles.card} key={index}>
