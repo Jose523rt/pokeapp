@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
+import { Text } from "react-native-paper";
 import React from 'react'
 
 export default function AboutScreen() {
@@ -8,20 +9,19 @@ export default function AboutScreen() {
 
       <View style={styles.body}>
   
-        <View style={styles.avatarCircle}>
-          <Text style={styles.avatarEmoji}>🧢</Text>
-        </View>
+        <Image style={styles.avatarCircle} source={require("../../assets/pokebola.png")}/>
 
-        <Text style={styles.name}>Ash Ketchum</Text>
-        <Text style={styles.region}>Pueblo Paleta · Kanto</Text>
+        <Text style={styles.name}>PokeApp</Text>
+        <Text style={styles.region}>Equipo TI41</Text>
 
-        <View style={styles.divider} />
+        <View style={styles.divider}/>
 
+        <View style={{paddingBottom:10}}><Text variant='titleMedium'>Miembro del equipo</Text></View>
+        
         <View style={styles.infoBlock}>
-          <Row label="Correo"   value="ash@pokemon.com" />
-          <Row label="Equipo"   value="Pikachu, Charizard..." />
-          <Row label="Medallas" value="8" />
-          <Row label="Pokédex"  value="142 capturados" />
+          <Row label="Backend Developer"   value="Ofeck Megidish" />
+          <Row label="Backend Developer" value="José Canche" />
+          <Row label="Frontend Developer"   value="Angel Vilanueva" />
         </View>
       </View>
 

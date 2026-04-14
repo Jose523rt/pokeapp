@@ -135,18 +135,18 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: "#fff",
   },
-types: {
-  flexDirection: "row",
-  gap: 20,
-  marginTop: 5,
-  padding: 8,
-  borderRadius: 8,
-  backgroundColor: "#CD2B2B", // rojo pokédex
-  borderWidth: 2,
-  borderColor: "#1d2138",     // azul pokédex
-},
+  types: {
+    flexDirection: "row",
+    gap: 20,
+    marginTop: 5,
+    padding: 8,
+    borderRadius: 8,
+    backgroundColor: "#CD2B2B", // rojo pokédex
+    borderWidth: 2,
+    borderColor: "#CD2B2B",     // azul pokédex
+  },
   typeImage: {
-    width: 100,
+    width: 130,
     height: 30,
   },
   add: {
@@ -167,10 +167,11 @@ types: {
     letterSpacing: 0.5,
   },
   modal: {
-    backgroundColor: "#1d2138ad", // azul pokédex
+    backgroundColor: "#1d2138", // azul pokédex
     padding: 20,
     height: 150,
     borderRadius: 16,
+    margin:15,
     alignItems: "center",
     justifyContent: "center",
   },

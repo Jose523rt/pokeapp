@@ -19,14 +19,14 @@ export default function BattlerScreen() {
 
  function battle() {
     if (!activePoke) {
-      Alert.alert("¡Espera!", "Selecciona un Pokémon antes de batallar.");
+      Alert.alert("¡Espera!", "Selecciona un Pokémon antes de combatir.");
       return;
     }
-    if (activePoke.stats[0].base_stat > activePokeFoe.stats[0].base_stat) {
+    if (activePoke.stats[1].base_stat > activePokeFoe.stats[1].base_stat) {
       showWin();
       getPokemonFoe(random);
       setFoeKey(prevKey => prevKey + 1);
-    } else if (activePoke.stats[0].base_stat === activePokeFoe.stats[0].base_stat) {
+    } else if (activePoke.stats[1].base_stat === activePokeFoe.stats[1].base_stat) {
       Alert.alert("Empate", "Selecciona otro pokemon");
     } else {
       showLoose();
@@ -94,6 +94,7 @@ export default function BattlerScreen() {
               onPress={() => { getPokemonFoe(random); setFoeKey(prevKey => prevKey + 1); }}
             >
               <Image source={{ uri: Pokemon.sprites.front_default }} style={styles.pokeImage} />
+              <Text variant='labelLarge' style={styles.text}>Fuerza: {Pokemon.stats[1].base_stat}</Text>
             </Card>
           ))}
         </View>
@@ -115,6 +116,7 @@ export default function BattlerScreen() {
           ) : (
             <Card style={styles.pokeCard} onPress={() => showTeam()}>
               <Image source={{ uri: activePoke.sprites.back_default }} style={styles.pokeImage} />
+              <Text variant='labelLarge' style={styles.text}>Fuerza: {activePoke.stats[1].base_stat}</Text>
             </Card>
           )}
         </View>
@@ -123,7 +125,7 @@ export default function BattlerScreen() {
       {/* ── Botón Fight ── */}
       <View style={styles.fightWrap}>
         <TouchableOpacity style={styles.fightBtn} onPress={() => battle()}>
-          <Text style={styles.fightText}>Batallar</Text>
+          <Text style={styles.fightText}>Pelear</Text>
         </TouchableOpacity>
       </View>
 
@@ -230,6 +232,7 @@ const styles = StyleSheet.create({
   // Arena de batalla
   arena: {
     flex: 1,
+    justifyContent:"center",
     paddingHorizontal: 20,
     paddingTop: 20,
   },
@@ -268,6 +271,8 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     overflow: 'hidden',
     padding: 4,
+    justifyContent:"center",
+    alignItems:"center"
   },
   emptyCard: {
     width: 160,
@@ -359,4 +364,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 4,
   },
+  text: {
+    justifyContent:"center",
+    alignItems:"center",
+    textAlign:"center",
+  }
 });

@@ -7,6 +7,7 @@ export default function TeamScreen() {
   const { slot1, slot2, slot3, slot4, slot5, slot6 } = useContext(TeamContext);
   const team = [slot1, slot2, slot3, slot4, slot5, slot6];
   const [index, setIndex] = useState(1);
+  const [boton, setboton] = useState(true);
 
   return (
     <ScrollView>
@@ -20,13 +21,13 @@ export default function TeamScreen() {
                   <Image source={{uri: slot.sprites.front_default}} style={styles.image}/>
                   <View style={styles.infoBox}>
                     <Text style={styles.text}>{slot.name}</Text>
-                    <Button 
+                    {!boton && <Button 
                       mode="contained-tonal" 
                       style={styles.button} 
                       onPress={()=> {slot = 0, index = index + 1}}
                     >
                       Eliminar del equipo
-                    </Button>
+                    </Button>}
                   </View>
                 </View>  
               </Card>
