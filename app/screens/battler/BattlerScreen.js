@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Image, TouchableOpacity, Alert } from 'react-native'
 import { Button, Card, Surface, Text, Portal, Modal } from "react-native-paper"
 import React, { useState, useEffect, useContext } from 'react'
 import{ TeamContext } from "../../context/Team";
@@ -9,7 +9,8 @@ export default function BattlerScreen() {
   const { slot1, slot2, slot3, slot4, slot5, slot6 } = useContext(TeamContext);
   const team = [slot1, slot2, slot3, slot4, slot5, slot6];
   const [hasTeam, setHasTeam] = useState(false);
-  const [key, setKey] = useState(1);
+  const [key, setKey] = useState(50);
+  const [foeKey, setFoeKey] = useState(1);
   const [ activePoke, setActivePoke ] = useState();
   const [activePokeFoe, setActivePokeFoe] = useState([])
   
@@ -20,16 +21,21 @@ export default function BattlerScreen() {
   const random = Math.floor(Math.random() * (151 - 1 + 1) + 1);
 
   function battle() {
-      if (activePoke.stats[0].base_stat > activePokeFoe.stats[0].base_stat) {
-        showWin()
-        console.log(`La vida de tu pokemon es de: ${activePoke.stats[0].base_stat}`)
-        console.log(`La vida de tu enemigo es de: ${activePokeFoe.stats[0].base_stat}`)
-      } else{
-        showLoose()
-        console.log(`La vida de tu pokemon es de: ${activePoke.stats[0].base_stat}`)
-        console.log(`La vida de tu enemigo es de: ${activePokeFoe.stats[0].base_stat}`)
-      }
-    
+    if (activePoke.stats[0].base_stat > activePokeFoe.stats[0].base_stat) {
+      showWin()
+      getPokemonFoe(random)
+      setFoeKey(prevKey => prevKey + 1)
+      //console.log(`La vida de tu pokemon es de: ${activePoke.stats[0].base_stat}`)
+      //console.log(`La vida de tu enemigo es de: ${activePokeFoe.stats[0].base_stat}`)
+    } else if(activePoke.stats[0].base_stat === activePokeFoe.stats[0].base_stat){
+      Alert.alert("Empate", "Selecciona otro pokemon")
+      //console.log(`La vida de tu pokemon es de: ${activePoke.stats[0].base_stat}`)
+      //console.log(`La vida de tu enemigo es de: ${activePokeFoe.stats[0].base_stat}`)
+    } else {
+      showLoose()
+    }
+  }
+
   const nav = useNavigation();
 
 
@@ -58,7 +64,7 @@ export default function BattlerScreen() {
 
   useEffect(() => {
     if (pokemonFoe && pokemonFoe.length > 0) {
-      setActivePokeFoe(pokemonFoe[0]); // O el que necesites
+      setActivePokeFoe(pokemonFoe[0]);
     }
   }, [pokemonFoe]);
 
@@ -88,9 +94,9 @@ export default function BattlerScreen() {
         </View>
       </Surface>
       </TouchableOpacity>
-      <View style={[styles.containerD, {bottom:140}]}>
+      <View key={foeKey} style={[styles.containerD, {bottom:140}]}>
         {pokemonFoe.map((Pokemon, index)=>(
-        <Card style={styles.card} key={index}>
+        <Card style={styles.card} onPress={()=> {getPokemonFoe(random), setFoeKey(prevKey => prevKey + 1) }} key={index}>
           <View>
             <Image source={{uri: Pokemon.sprites.front_default}} style={styles.image}/>
           </View>
@@ -140,7 +146,8 @@ export default function BattlerScreen() {
           <View style={styles.grid}>
             {team.map((slot, index) => (
               slot.length !== 0 && (
-                <Card key={index} style={styles.cardGrid} onPress={()=> {setKey(prevKey => prevKey + 1), setHasTeam(true), setActivePoke(slot)}}>
+                <Card key={index} style={styles.cardGrid} 
+                  onPress={()=> {setKey(prevKey => prevKey + 1), setHasTeam(true), setActivePoke(slot), hideTeam()}}>
                   <View>
                     <Image source={{uri: slot.sprites.front_default}} style={styles.team}/>
                     <Text style={styles.text}>{slot.name}</Text>
@@ -219,6 +226,6 @@ const styles = StyleSheet.create({
   },
   team: {
     width:80,
-    height:80
-  }
+    height:80,
+  },
 })
