@@ -37,3 +37,9 @@ Pendientes - Mostrar tipos de Pokemon en ambas pantallas (complicado), incluir b
 - Se agregó el botón "Agregar al equipo" y es completamente funcional
 ### 12 de Abril 6:52
 Se agregó el context file Team.
+
+### 13 de Abril
+- Se agrego la función de selección de equipo en la pantalla "BattlerScreen".
+- Se agrego la lógica detrás del funcionamiento de la batalla.
+- Se agregaron los modales para las situaciones de victoria y derrota.
+

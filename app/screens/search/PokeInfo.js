@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
+import { Portal, Modal } from "react-native-paper";
 import{ TeamContext } from "../../context/Team";
 //import EstadoGlobalUser, { EstadoGlobalUserContext } from './app/context/EstadoGlobalUser';
 
@@ -18,6 +19,10 @@ export default function PokeInfo({ route }) {
   const [type2, setType2] = useState([]);
   const [isT2, setIsT2] = useState(false);
   const { AddToTeam } = useContext(TeamContext);
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
 
   function GetTypes(a, b) {
     const requestOptions = {
@@ -93,13 +98,18 @@ export default function PokeInfo({ route }) {
               )}
             </View>
             <TouchableOpacity
-              onPress={() => AddToTeam(pkmn)}
+              onPress={() => {AddToTeam(pkmn), showModal()}}
               style={styles.add}
             >
               <Text style={styles.addText}>Agregar al equipo</Text>
             </TouchableOpacity>
           </View>
         ))}
+      <Portal>
+        <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={styles.modal}>
+          <Text variant='displayLarge' style={styles.text}>Pokemon agregado al equipo !!</Text>
+        </Modal>
+      </Portal>
       </View>
     </ScrollView>
   );
@@ -144,5 +154,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
+  },
+  modal: {
+    backgroundColor: 'white', 
+    padding: 20,
+    height:600
   },
 });
