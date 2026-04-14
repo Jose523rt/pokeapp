@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import{ TeamContext } from "../../context/Team";
-//import EstadoGlobalUser, { EstadoGlobalUserContext } from './app/context/EstadoGlobalUser';
 
 
 export default function PokeInfo({ route }) {
@@ -28,7 +27,6 @@ export default function PokeInfo({ route }) {
     fetch(`https://pokeapi.co/api/v2/type/${a}/`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        //console.log(JSON.stringify(result.sprites));
         setType1([result]);
       })
       .catch((error) => console.error(error));

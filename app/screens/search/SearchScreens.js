@@ -25,7 +25,7 @@ export default function SearchScreens() {
           data.results.map((p) => fetch(p.url).then((r) => r.json()))
         ))
         .then((allPokemon) => setPokemon(allPokemon))
-  .catch((error) => console.error(error));
+        .catch((error) => console.error(error));
     }
     else {
       fetch(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`, requestOptions)

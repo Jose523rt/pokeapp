@@ -37,3 +37,7 @@ Pendientes - Mostrar tipos de Pokemon en ambas pantallas (complicado), incluir b
 - Se agregó el botón "Agregar al equipo" y es completamente funcional
 ### 12 de Abril 6:52
 Se agregó el context file Team.
+
+### 13 de Abril
+Se terminaron TypeSearch y TypeTable, se creo BattleStack para habilitar la navegacion entre los stacks de la Battle Screen.
+El proyecto esta listo para mandar al styler.

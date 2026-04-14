@@ -1,6 +1,7 @@
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import { Button, Card, Surface, Text, Portal, Modal } from "react-native-paper"
 import React, { useState, useEffect } from 'react'
+import { useNavigation } from "@react-navigation/native";
 
 export default function BattlerScreen() {
   const ImgPlaceholder = require("../../assets/lucario.png");
@@ -9,6 +10,8 @@ export default function BattlerScreen() {
   const [pokemonMate, setPokemonMate] = useState([]);
   const [search, setSearch] = useState(4);
   const random = Math.floor(Math.random() * (151 - 1 + 1) + 1);
+
+  const nav = useNavigation();
 
   function hasWon(){
     if (Pokemon.types.type.name ){
@@ -61,6 +64,7 @@ export default function BattlerScreen() {
 
   return (
     <View>
+      <TouchableOpacity onPress={() => nav.navigate('typesearch')}>
       <Surface style={styles.surface} mode='flat' elevation={4}>
         <View style={styles.containerS}>
           <View style={styles.typeItem}>
@@ -72,6 +76,7 @@ export default function BattlerScreen() {
           </View>
         </View>
       </Surface>
+      </TouchableOpacity>
       <View style={[styles.containerD, {bottom:140}]}>
         {pokemonFoe.map((Pokemon, index)=>(
         <Card style={styles.card} key={index}>
@@ -106,7 +111,7 @@ export default function BattlerScreen() {
           <Text variant='displayLarge' style={styles.text}>You Won</Text>
         </Modal>
         <Modal visible={visible1} onDismiss={hideModal1} contentContainerStyle={styles.modal}>
-          <Text variant='displayLarge' style={styles.text}>You Loose</Text>
+          <Text variant='displayLarge' style={styles.text}>You Lose</Text>
         </Modal>
       </Portal>
     </View>
