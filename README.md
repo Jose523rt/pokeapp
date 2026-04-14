@@ -45,3 +45,12 @@ Se agregó el context file Team.
 
 Se terminaron TypeSearch y TypeTable, se creo BattleStack para habilitar la navegacion entre los stacks de la Battle Screen.
 El proyecto esta listo para mandar al styler.
+
+#### Funciones añadidas en BattlerScreen
+- El enemigo ahora cambian al ser derrotados.
+- El enemigo puede cambiarse al presionarlo.
+- Se agregó un evento de empate al Battler.
+
+#### Funciones en TeamScreen
+- Se mejoró la creación de cards mediante el uso de la propiedad .map()
+- Se implementaron botones para eliminar la pokemon del equipo en las cards (Aún no son funcioales)
