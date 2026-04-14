@@ -39,5 +39,21 @@ Pendientes - Mostrar tipos de Pokemon en ambas pantallas (complicado), incluir b
 Se agregó el context file Team.
 
 ### 13 de Abril
+- Se agrego la función de selección de equipo en la pantalla "BattlerScreen".
+- Se agrego la lógica detrás del funcionamiento de la batalla.
+- Se agregaron los modales para las situaciones de victoria y derrota.
+
 Se terminaron TypeSearch y TypeTable, se creo BattleStack para habilitar la navegacion entre los stacks de la Battle Screen.
 El proyecto esta listo para mandar al styler.
+
+#### Funciones añadidas en BattlerScreen
+- El enemigo ahora cambian al ser derrotados.
+- El enemigo puede cambiarse al presionarlo.
+- Se agregó un evento de empate al Battler.
+
+#### Funciones añadidas en PokeInfo
+- Ahora se muestra una alerta al tener lleno el equipo
+
+#### Funciones en TeamScreen
+- Se mejoró la creación de cards mediante el uso de la propiedad .map()
+- Se implementaron botones para eliminar la pokemon del equipo en las cards (Aún no son funcioales)
