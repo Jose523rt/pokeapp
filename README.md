@@ -51,6 +51,9 @@ El proyecto esta listo para mandar al styler.
 - El enemigo puede cambiarse al presionarlo.
 - Se agregó un evento de empate al Battler.
 
+#### Funciones añadidas en PokeInfo
+- Ahora se muestra una alerta al tener lleno el equipo
+
 #### Funciones en TeamScreen
 - Se mejoró la creación de cards mediante el uso de la propiedad .map()
 - Se implementaron botones para eliminar la pokemon del equipo en las cards (Aún no son funcioales)
