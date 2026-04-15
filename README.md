@@ -57,3 +57,9 @@ El proyecto esta listo para mandar al styler.
 #### Funciones en TeamScreen
 - Se mejoró la creación de cards mediante el uso de la propiedad .map()
 - Se implementaron botones para eliminar la pokemon del equipo en las cards (Aún no son funcioales)
+
+  ### 14 de Abri
+  - Se modificarion estilos en la pantalla BattlerScreen para centrar los contenidos
+  - Se modifico la opacidad de un modal en la pantalla PokeInfo
+  - Ahora las estadísticas son visibles en la pantalla de Battler
+  - Se ocultó el botón de Eliminar pokemon del equipo
