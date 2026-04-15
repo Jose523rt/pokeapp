@@ -1,13 +1,17 @@
 {
   "expo": {
-    "name": "pokeapp",
+    "name": "PokeApp",
     "slug": "pokeapp",
     "version": "1.0.0",
     "icon": "./app/assets/icon.png",
     "extra": {
       "eas": {
-        "projectId": "5efefe97-8665-4bed-a569-1a07383558e1"
+        "projectId": "ecbbcd56-9d08-433f-a15e-2bb1b6797a73"
       }
+    },
+    "owner": "josecanche",
+    "android": {
+      "package": "com.josecanche.pokeapp"
     }
   }
 }
